@@ -1,0 +1,21 @@
+.question-tag {
+    background-color: var(--primary);
+    color: var(--color-primary);
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weight-semi-bold);
+    border-radius: var(--border-radius);
+}
+
+.question-text {
+    line-height: var(--line-height-hight);
+    white-space: pre-wrap;
+}
+
+.question-response-text {
+    white-space: pre-wrap;
+    line-height: var(--line-height-hight);
+}
+
+small {
+    color: var(--gray);
+}

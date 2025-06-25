@@ -1,5 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="MessDetector">
+    <phpmd_settings>
+      <phpmd_by_interpreter asDefaultInterpreter="true" interpreter_id="e9f1aec9-6d55-45dd-a55d-8d81e4c9f5ba" timeout="30000" />
+    </phpmd_settings>
+  </component>
+  <component name="MessDetectorOptionsConfiguration">
+    <option name="transferred" value="true" />
+  </component>
+  <component name="PHPCSFixerOptionsConfiguration">
+    <option name="transferred" value="true" />
+  </component>
+  <component name="PHPCodeSnifferOptionsConfiguration">
+    <option name="highlightLevel" value="WARNING" />
+    <option name="transferred" value="true" />
+  </component>
+  <component name="PhpCodeSniffer">
+    <phpcs_settings>
+      <phpcs_by_interpreter asDefaultInterpreter="true" interpreter_id="e9f1aec9-6d55-45dd-a55d-8d81e4c9f5ba" timeout="30000" />
+    </phpcs_settings>
+  </component>
   <component name="PhpIncludePathManager">
     <include_path>
       <path value="$PROJECT_DIR$/vendor/nikic/php-parser" />
@@ -130,12 +150,19 @@
       <path value="$PROJECT_DIR$/vendor/twig/extra-bundle" />
       <path value="$PROJECT_DIR$/vendor/webmozart/assert" />
       <path value="$PROJECT_DIR$/vendor/masterminds/html5" />
+      <path value="$PROJECT_DIR$/vendor/knplabs/knp-time-bundle" />
     </include_path>
   </component>
-  <component name="PhpProjectSharedConfiguration" php_language_level="8.0" />
+  <component name="PhpProjectSharedConfiguration" php_language_level="8.2" />
+  <component name="PhpStanOptionsConfiguration">
+    <option name="transferred" value="true" />
+  </component>
   <component name="PhpUnit">
     <phpunit_settings>
       <PhpUnitSettings custom_loader_path="$PROJECT_DIR$/vendor/autoload.php" />
     </phpunit_settings>
+  </component>
+  <component name="PsalmOptionsConfiguration">
+    <option name="transferred" value="true" />
   </component>
 </project>
