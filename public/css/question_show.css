@@ -6,10 +6,7 @@
     border-radius: var(--border-radius);
 }
 
-.question-text {
-    line-height: var(--line-height-hight);
-    white-space: pre-wrap;
-}
+
 
 .question-response-text {
     white-space: pre-wrap;

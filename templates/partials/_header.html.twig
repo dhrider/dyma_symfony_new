@@ -7,9 +7,21 @@
             <i class="fa-solid fa-magnifying-glass"></i>
             <input type="text">
         </div>
+        {% if app.user %}
+            <div class="d-flex flex-row-nowrap justify-content-center align-items-center">
+                <a href="{{ path('current_user') }}">
+                    <img src="{{ app.user.picture }}" class="mr-10">
+                </a>
+                <small><a href="{{ path('logout') }}" class="avatar-lg">Déconnexion</a></small>
+            </div>
+        {% else %}
+            <div>
+                <a href="{{ path('signup') }}" class="btn btn-primary mr-5">Inscription</a>
+                <a href="{{ path('login') }}" class="btn btn-primary">Connexion</a>
+            </div>
+
+        {% endif %}
         <div>
-            <button class="btn btn-primary mr-5">Inscription</button>
-            <button class="btn btn-primary-stroke">Connexion</button>
         </div>
     </div>
 </header>

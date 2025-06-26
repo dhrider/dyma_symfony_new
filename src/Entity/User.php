@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
@@ -19,6 +20,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180)]
+    #[Assert\Email(message: 'Veuillez entrer une adresse email valide.')]
+    #[Assert\NotBlank(message: 'Veuillez entrer un adresse email.')]
     private ?string $email = null;
 
     /**
@@ -31,12 +34,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
+    #[Assert\NotBlank(message: 'Veuillez entrer un mot de passe.')]
+    #[Assert\Length(min: 6, max: 255, minMessage: 'Veuillez entrer un mot de passe de 6 caractères au minimum.')]
     private ?string $password = null;
 
+    #[Assert\Length(min: 6, max: 255, minMessage: 'Veuillez entrer un mot de passe de 6 caractères au minimum.')]
+    private ?string $newPassword = null;
+
+
+
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Veuillez entrer un prénom.')]
     private ?string $firstname = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Veuillez entrer un nom.')]
     private ?string $lastname = null;
 
     /**
@@ -52,12 +64,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private Collection $comments;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Url(message: 'L\'image doit provenir d\'une URL')]
+    #[Assert\NotBlank(message: 'Veuillez entrer une URL valide.')]
     private ?string $picture = null;
+
+    /**
+     * @var Collection<int, Vote>
+     */
+    #[ORM\OneToMany(targetEntity: Vote::class, mappedBy: 'author', orphanRemoval: true)]
+    private Collection $votes;
 
     public function __construct()
     {
         $this->questions = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->votes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -122,6 +143,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->password = $password;
 
         return $this;
+    }
+    public function getNewPassword(): ?string
+    {
+        return $this->newPassword;
+    }
+
+    public function setNewPassword(?string $newPassword): void
+    {
+        $this->newPassword = $newPassword;
     }
 
     /**
@@ -225,6 +255,41 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPicture(string $picture): static
     {
         $this->picture = $picture;
+
+        return $this;
+    }
+
+    public function getFullname(): ?string
+    {
+        return $this->firstname . ' ' . $this->lastname;
+    }
+
+    /**
+     * @return Collection<int, Vote>
+     */
+    public function getVotes(): Collection
+    {
+        return $this->votes;
+    }
+
+    public function addVote(Vote $vote): static
+    {
+        if (!$this->votes->contains($vote)) {
+            $this->votes->add($vote);
+            $vote->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVote(Vote $vote): static
+    {
+        if ($this->votes->removeElement($vote)) {
+            // set the owning side to null (unless already changed)
+            if ($vote->getAuthor() === $this) {
+                $vote->setAuthor(null);
+            }
+        }
 
         return $this;
     }

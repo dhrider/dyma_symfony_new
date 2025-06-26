@@ -295,6 +295,11 @@ textarea {
     border-radius: 50%;
 }
 
+.avatar-lg {
+    width: 40px;
+    border-radius: 50%;
+}
+
 .clickable {
     color: var(--primary);
     font-weight: var(--font-weight-semi-bold);
@@ -392,4 +397,18 @@ footer {
 
 .rating-down {
     color: var(--warning);
+}
+
+/* Question-text */
+
+.question-text {
+    line-height: var(--line-height-hight);
+    white-space: pre-wrap;
+}
+
+/* user profile */
+
+.profile-picture {
+    width: 150px;
+    border-radius: var(--border-radius);
 }
