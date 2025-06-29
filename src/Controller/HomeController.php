@@ -13,6 +13,7 @@ final class HomeController extends AbstractController
     #[Route('/', name: 'home')]
     public function index(EntityManagerInterface $em): Response
     {
+
         $questions = $em->getRepository(Question::class)->getQuestionsWithAuthors();
 
         return $this->render('home/index.html.twig', [
